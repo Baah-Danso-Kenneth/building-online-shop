@@ -8,7 +8,8 @@ urlpatterns = [
     path('',TemplateView.as_view(template_name='index.html')),
     path("admin/", admin.site.urls),
     path('shop/', include('shops.urls', namespace='shops')),
-    path('cart/', include('carts.urls', namespace='carts'))
+    path('cart/', include('carts.urls', namespace='carts')),
+    path('order/', include('orders.urls', namespace='orders'))
 ]
 
 if settings.DEBUG:
