@@ -124,7 +124,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-CART_SECTION_ID = os.environ.get('CART_SECTION_ID')
+CART_SESSION_ID = os.environ.get('CART_SESSION_ID')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
