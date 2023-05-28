@@ -43,9 +43,9 @@ INSTALLED_APPS = [
     # local apps
     'shops.apps.ShopsConfig',
     'carts.apps.CartsConfig',
-    'orders.apps.OrdersConfig'
+    'orders.apps.OrdersConfig',
+    'payments.apps.PaymentsConfig'
 ]
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -138,3 +138,16 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+#Email Server Configuration
+EMAIL_HOST=os.environ.get("EMAIL_HOST")
+EMAIL_HOST_USER=os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD=os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_PORT=os.environ.get("EMAIL_PORT")
+EMAIL_USE_TLS=os.environ.get("EMAIL_USE_TLS")
+
+STRIPE_API_VERSION=os.environ.get('STRIPE_API_VERSION')
+STRIPE_SECRET_KEY=os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_WEBHOOK_SECRET= os.environ.get('STRIPE_WEBHOOK_SECRET')
+
