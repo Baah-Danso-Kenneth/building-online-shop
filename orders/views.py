@@ -1,9 +1,16 @@
-from django.shortcuts import render, redirect
-from .models import OrderItem
+import os
+
+from django.conf import settings
+from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template.loader import render_to_string
+import weasyprint
+from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from carts.cart import Cart
 from .tasks import order_created
 from django.urls import reverse
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 def order_create(request):
@@ -28,3 +35,19 @@ def order_create(request):
         form
     context={'cart':cart,'form':form}
     return render(request, 'orders/create.html',context)
+@staff_member_required
+def admin_order_detail(request,order_id):
+    order = get_object_or_404(Order, id=order_id)
+    context={'order':order}
+    return render(request,'admin/orders/detail.html',context)
+
+@staff_member_required
+def admin_order_pdf(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    html = render_to_string('orders/pdf.html', {'order': order})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'filename=order_{order.id}.pdf'
+    css_path = os.path.join(settings.BASE_DIR, 'static/css/pdf.css')
+    weasyprint.HTML(string=html).write_pdf(response, stylesheets=[weasyprint.CSS(filename=css_path)])
+
+    return response
