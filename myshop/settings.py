@@ -44,8 +44,10 @@ INSTALLED_APPS = [
     'shops.apps.ShopsConfig',
     'carts.apps.CartsConfig',
     'orders.apps.OrdersConfig',
-    'payments.apps.PaymentsConfig'
+    'payments.apps.PaymentsConfig',
+    'coupons.apps.CouponsConfig',
 ]
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
