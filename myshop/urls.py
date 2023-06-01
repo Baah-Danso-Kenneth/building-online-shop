@@ -6,11 +6,12 @@ from django.conf import settings
 
 urlpatterns = [
     path('',TemplateView.as_view(template_name='index.html')),
+    path('coupon/', include('coupons.urls', namespace='couponst')),
     path("admin/", admin.site.urls),
     path('shop/', include('shops.urls', namespace='shops')),
     path('cart/', include('carts.urls', namespace='carts')),
     path('order/', include('orders.urls', namespace='orders')),
-    path('payment/', include('payments.urls', namespace='payments'))
+    path('payment/', include('payments.urls', namespace='payments')),
 ]
 
 if settings.DEBUG:
