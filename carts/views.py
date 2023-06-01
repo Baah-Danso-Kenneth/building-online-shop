@@ -3,7 +3,7 @@ from shops.models import Product
 from django.views.decorators.http import require_POST
 from .cart import Cart
 from .forms import CartAddProduct
-
+from coupons.forms import CouponApplyForm
 @require_POST
 def cart_add(request,product_id):
     cart = Cart(request)
@@ -28,4 +28,5 @@ def cart_detail(request):
             'quantity':item['quantity'],
             'override':True
         })
-    return render(request,'carts/detail.html',{'cart':cart})
+    coupon_apply_form = CouponApplyForm()
+    return render(request,'carts/detail.html',{'cart':cart, 'coupon_apply_form':coupon_apply_form})
